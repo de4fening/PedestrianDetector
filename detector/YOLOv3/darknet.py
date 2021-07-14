@@ -85,7 +85,7 @@ class Darknet(nn.Module):
         super(Darknet, self).__init__()
         self.use_cuda = use_cuda
         self.blocks = parse_cfg(cfgfile)
-        self.models = self.create_network(self.blocks) # merge conv, bn,leaky
+        self.models = self.create_network(self.blocks)# merge conv, bn,leaky
         self.loss_layers = self.getLossLayers()
 
         #self.width = int(self.blocks[0]['width'])
@@ -407,9 +407,9 @@ class Darknet(nn.Module):
             elif block['type'] == 'connected':
                 model = self.models[ind]
                 if block['activation'] != 'linear':
-                    save_fc(fp, model)
+                    save_fc(fp, model)# раньше тут было fc, стало fp
                 else:
-                    save_fc(fp, model[0])
+                    save_fc(fp, model[0])# тоже самое, что и в функции выше.
             elif block['type'] == 'maxpool':
                 pass
             elif block['type'] == 'reorg':
